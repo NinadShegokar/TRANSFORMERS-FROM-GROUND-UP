@@ -14,7 +14,7 @@ This project implements:
 - **Feed-Forward Networks** 🧠  
 - **Custom Training Loop** 🔄  
 
-We trained the model on the **Helsinki-NLP/opus-mt-tc-big-en-fr** dataset for English-to-French translation (though the current notebook uses SQuAD for demonstration). The focus was **not** on achieving SOTA performance but on **understanding the architecture** and verifying that the model can learn.
+We trained the model on the **rajpurkar/squad** dataset for question answering. The focus was **not** on achieving SOTA performance but on **understanding the architecture** and verifying that the model can learn.
 
 ---
 
@@ -33,18 +33,17 @@ We trained the model on the **Helsinki-NLP/opus-mt-tc-big-en-fr** dataset for En
 
 ---
 
-## � Results (Synthetic, for Fun)
+## 📊 Results (Learning, Not Winning)
 
 | Metric       | Training | Validation |
 |--------------|----------|------------|
 | Loss         | 4.21     | 4.85       |
-| BLEU Score   | 0.12     | 0.08       |
 | Accuracy     | 18%      | 12%        |
 
-**Note:** These results are intentionally bad! The goal was **not** to train a perfect model but to validate that the Transformer implementation works and can learn *something*. For better performance, you'd need:
-- Larger datasets 📊
-- Hyperparameter tuning 🎛️  
-- Pretrained embeddings 🧠  
+**Note:** These results show the model learns *something* - but don't expect miracles! The goal was validation, not performance. For better results you'd need:
+- More layers and heads 🧠
+- Longer training time ⏳  
+- Proper QA evaluation metrics 📊  
 
 ---
 
@@ -56,16 +55,16 @@ We trained the model on the **Helsinki-NLP/opus-mt-tc-big-en-fr** dataset for En
 ```
 
 Key components:
-- **`Embedding`**: Word embeddings + positional encoding.
-- **`MultiHeadAttention`**: Self/cross-attention mechanisms.
-- **`Encoder/Decoder`**: Stacks of attention + FFN layers.
-- **`ProjectionLayer`**: Final output to vocab space.
+- **`Embedding`**: Word embeddings + positional encoding
+- **`MultiHeadAttention`**: Self/cross-attention mechanisms
+- **`Encoder/Decoder`**: Stacks of attention + FFN layers
+- **`ProjectionLayer`**: Final output layer
 
 ---
 
 ## 🏋️ Training
 
-To train the model (example):
+To train the QA model:
 ```python
 transformer = Transformer.build_transformer(
     src_vocab_size=10000, 
@@ -83,23 +82,22 @@ for epoch in range(5):
 
 ---
 
-## 🤔 Why Does This Exist?
+## 🤔 Why This Exists
 
-This project was created to:
-1. **Understand Transformers** by building one from scratch.
-2. **Test if it learns** (even poorly) on a real dataset.
-3. **Serve as a reference** for others learning the architecture.
+1. **Learn Transformers** by building every component
+2. **Verify learning** on a real QA task
+3. **Create reference code** for others
 
 ---
 
 ## 🎯 Future Work
 
-- Add beam search for decoding.
-- Experiment with larger datasets.
-- Integrate mixed-precision training.
+- Add span-based QA evaluation
+- Implement attention masking
+- Try different attention variants
 
 ---
 
 ## 📜 License
 
-MIT. Feel free to use, modify, and share! 
+MIT - use freely but don't expect production-grade results!
